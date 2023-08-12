@@ -14,6 +14,10 @@ app.config['MYSQL_DB'] = os.getenv('DATABASE')
 
 mysql = MySQL(app)
 
+@app.route('/')
+def home():
+    return 'FreakTheBandAPI'
+
 @app.route('/news')
 def news_db():
     cur = mysql.connection.cursor()
