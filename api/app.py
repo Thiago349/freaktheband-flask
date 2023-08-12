@@ -1,19 +1,16 @@
-import flask
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_mysqldb import MySQL
 import os
-import smtplib
-import email.message
 
 
 app = Flask(__name__)
 CORS(app)
 
-app.config['MYSQL_HOST'] = os.getenv('HOST')
-app.config['MYSQL_USER'] = os.getenv('USER')
-app.config['MYSQL_PASSWORD'] = os.getenv('PASSWORD')
-app.config['MYSQL_DB'] = os.getenv('DATABASE')
+#app.config['MYSQL_HOST'] = os.getenv('HOST')
+#app.config['MYSQL_USER'] = os.getenv('USER')
+#app.config['MYSQL_PASSWORD'] = os.getenv('PASSWORD')
+#app.config['MYSQL_DB'] = os.getenv('DATABASE')
 
 mysql = MySQL(app)
 
