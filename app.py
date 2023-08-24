@@ -43,7 +43,7 @@ def rocksession_db():
     fetchdata = jsonify(fetchdata)
     return fetchdata
 
-@app.route('/contact', methods=["POST"])
+@app.route('/contact', methods=["GET", "POST"])
 def contact_email():
     if request.method == "POST":
         content = f"""
@@ -62,6 +62,9 @@ def contact_email():
         send.starttls()
         send.login(msg['From'], password)
         send.sendmail(msg['From'], msg['To'], msg.as_string().encode('utf-8'))
+        return "OK", 200
+    else:
+        return "ContactFreakTheBand"
 
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
