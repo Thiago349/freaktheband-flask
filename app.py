@@ -47,12 +47,12 @@ def rocksession_db():
 def contact_email():
     if request.method == "POST":
         content = f"""
-        <p>Nome: {request.form['name']}<p>
-        <p>E-mail: {request.form['email']}<p>
-        <p>{request.form['content']}<p>
+        <p>Nome: {request.form['data']['name']}<p>
+        <p>E-mail: {request.form['data']['email']}<p>
+        <p>{request.form['data']['content']}<p>
         """
         msg = email.message.Message()
-        msg['Subject'] = request.form['subject']
+        msg['Subject'] = request.form['data']['subject']
         msg['From'] = "contact.freaktheband@gmail.com"
         msg['To'] = "contact.freaktheband@gmail.com"
         msg.add_header("Content-Type", 'text/html')
