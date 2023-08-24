@@ -49,7 +49,7 @@ def contact_email():
         content = f"""
         <p>Nome: {request.form['name']}<p>
         <p>E-mail: {request.form['email']}<p>
-        <p>{request.form['email-content']}<p>
+        <p>{request.form['email_content']}<p>
         """
         msg = email.message.Message()
         msg['Subject'] = request.form['subject']
