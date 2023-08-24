@@ -2,7 +2,8 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_mysqldb import MySQL
 import os
-
+import smtplib
+import email.message
 
 app = Flask(__name__)
 CORS(app)
@@ -41,6 +42,26 @@ def rocksession_db():
     fetchdata = cur.fetchall()
     fetchdata = jsonify(fetchdata)
     return fetchdata
+
+@app.route('/contact', methods=["POST"])
+def contact_email():
+    if request.method == "POST":
+        content = f"""
+        <p>Nome: {request.form['name']}<p>
+        <p>E-mail: {request.form['email']}<p>
+        <p>{request.form['email-content']}<p>
+        """
+        msg = email.message.Message()
+        msg['Subject'] = request.form['subject']
+        msg['From'] = "contact.freaktheband@gmail.com"
+        msg['To'] = "contact.freaktheband@gmail.com"
+        msg.add_header("Content-Type", 'text/html')
+        password = os.getenv('EMAIL_PW')
+        msg.set_payload(content)
+        send = smtplib.SMTP('smtp.gmail.com: 587')
+        send.starttls()
+        send.login(msg['From'], password)
+        send.sendmail(msg['From'], msg['To'], msg.as_string().encode('utf-8'))
 
 if __name__ == "__main__":
     # Setting debug to True enables debug output. This line should be
