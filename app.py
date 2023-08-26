@@ -46,7 +46,22 @@ def rocksession_db():
 @app.route('/contact', methods=["GET", "POST"])
 def contact_email():
     if request.method == "POST":
-        print("0i")
+        content = f"""
+        <p>Nome: {request.form['data']['name']}<p>
+        <p>E-mail: {request.form['data']['email']}<p>
+        <p>{request.form['data']['content']}<p>
+        """
+        msg = email.message.Message()
+        msg['Subject'] = request.form['data']['subject']
+        msg['From'] = "contact.freaktheband@gmail.com"
+        msg['To'] = "contact.freaktheband@gmail.com"
+        msg.add_header("Content-Type", 'text/html')
+        password = os.getenv('EMAIL_PW')
+        msg.set_payload(content)
+        send = smtplib.SMTP('smtp.gmail.com: 587')
+        send.starttls()
+        send.login(msg['From'], password)
+        send.sendmail(msg['From'], msg['To'], msg.as_string().encode('utf-8'))
     else:
         return "ContactFreakTheBand"
 
