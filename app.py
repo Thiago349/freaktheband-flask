@@ -62,7 +62,7 @@ def contact_email():
         send.starttls()
         send.login(msg['From'], password)
         send.sendmail(msg['From'], msg['To'], msg.as_string().encode('utf-8'))
-        return "OK", 200
+        print("TESTE")
     else:
         return "ContactFreakTheBand"
 
