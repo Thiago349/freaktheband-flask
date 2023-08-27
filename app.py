@@ -46,15 +46,13 @@ def rocksession_db():
 @app.route('/contact', methods=["GET", "POST"])
 def contact_email():
     if request.method == "POST":
-        '''content = f"""
+        content = f"""
         <p>Nome: {request.form['name']}<p>
         <p>E-mail: {request.form['email']}<p>
         <p>{request.form['content']}<p>
-        """'''
-        #msg['Subject'] = request.form['subject']
-        content='TESTETESTE'
+        """
+        msg['Subject'] = request.form['subject']
         msg = email.message.Message()
-        msg['Subject'] = "TESTE"
         msg['From'] = "contact.freaktheband@gmail.com"
         msg['To'] = "contact.freaktheband@gmail.com"
         msg.add_header("Content-Type", 'text/html')
