@@ -46,6 +46,7 @@ def rocksession_db():
 @app.route('/contact', methods=["GET", "POST"])
 def contact_email():
     if request.method == "POST":
+        print("OI")
         print(request)
         msg = email.message.Message()
         '''
