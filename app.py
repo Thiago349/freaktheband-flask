@@ -47,7 +47,7 @@ def rocksession_db():
 def contact_email():
     if request.method == "POST":
         print("OI")
-        print(request.form['name'])
+        print(request.form.getlist['name[]'])
         msg = email.message.Message()
         '''
         content = f"""
